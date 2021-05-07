@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: dev
+logging:
+  config: classpath:logback.xml
+hbase-plugin:
+  zookeeperQuorum: yunhadoop1,yunhadoop2,yunhadoop3,yunhadoop4,yunhadoop5
+  modeEnum: dev
+
+#扫描spring包 初始化htable 自动建表
+
+# 适配关联查询 一对多 多对多（暂不支持）
+
+#适配根据条件查询 以及过滤查询  、排序（暂不支持）
