@@ -6,7 +6,10 @@
 
     <groupId>io.github.lcf-wmz</groupId>
     <artifactId>hbase</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
+        <!--    -SNAPSHOT-->
+
+
 
     <packaging>pom</packaging>
 
@@ -20,7 +23,7 @@
     </modules>
 
     <properties>
-        <hbase-plugin.version>1.1-SNAPSHOT</hbase-plugin.version>
+        <hbase-plugin.version>1.1</hbase-plugin.version>
         <hbase-plugin-spring-boot.version>${project.version}</hbase-plugin-spring-boot.version>
         <spring.boot.version>2.1.1.RELEASE</spring.boot.version>
         <hbase.version>2.1.0</hbase.version>
@@ -85,17 +88,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!--<distributionManagement>
+    <distributionManagement>
         <repository>
-            <id>releases</id>
-            <url>http://***/nexus/content/repositories/releases</url>
+            <id>oss-releases</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
-            <url>http://***/nexus/content/repositories/snapshots</url>
+            <id>oss-snapshots</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
         </snapshotRepository>
-    </distributionManagement>-->
+    </distributionManagement>
 
     <build>
         <plugins>
@@ -107,6 +109,11 @@
                     <target>${jdk.version}</target>
                     <encoding>${encoding}</encoding>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
             </plugin>
         </plugins>
     </build>
@@ -126,5 +133,32 @@
             </snapshots>
         </repository>
     </repositories>-->
+
+
+    <description>this is a hbase-plugin.</description>
+    <url>https://github.com/lcf-wmz/hbase</url>
+    <licenses>
+        <license>
+            <name>hbase-plugin</name>
+            <url>http://www.***.com/hbase-plugin/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>OSS license</comments>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/lcf-wmz/hbase.git</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>wmz</id>
+            <name>lcf-wmz</name>
+            <email>1154535007@qq.com</email>
+            <roles>
+                <role>Project Manager</role>
+            </roles>
+
+        </developer>
+    </developers>
 
 </project>

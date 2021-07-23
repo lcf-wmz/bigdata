@@ -1,4 +1,4 @@
-package com.wmz.hbase.plugin.test.example.service;
+package com.wmz.hbase.plugin.example.service;
 
 import org.springframework.stereotype.Service;
 

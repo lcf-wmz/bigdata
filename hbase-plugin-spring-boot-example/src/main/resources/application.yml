@@ -5,7 +5,7 @@ logging:
   config: classpath:logback.xml
 hbase-plugin:
   zookeeperQuorum: yunhadoop1,yunhadoop2,yunhadoop3,yunhadoop4,yunhadoop5
-  modeEnum: dev
+  mode-enum: dev
 
 #扫描spring包 初始化htable 自动建表
 

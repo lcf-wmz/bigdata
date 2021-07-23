@@ -1,4 +1,4 @@
-package com.wmz.hbase.plugin.test.example.entity;
+package com.wmz.hbase.plugin.example.entity;
 
 import com.wmz.hbase.plugin.annotation.HbaseRowKey;
 

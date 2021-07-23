@@ -1,4 +1,4 @@
-package com.wmz.hbase.plugin.test.example.entity;
+package com.wmz.hbase.plugin.example.entity;
 
 import com.wmz.hbase.plugin.annotation.HbaseField;
 import com.wmz.hbase.plugin.annotation.HbaseRowKey;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class Order implements IOrder{
 
     //订单id
-//    @HbaseRowKey
+    @HbaseRowKey
     private String id;
     //交易时间
     @HbaseField

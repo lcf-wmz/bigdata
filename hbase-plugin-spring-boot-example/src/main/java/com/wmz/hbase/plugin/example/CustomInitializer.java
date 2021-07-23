@@ -1,6 +1,6 @@
-package com.wmz.hbase.plugin.test;
+package com.wmz.hbase.plugin.example;
 
-import com.wmz.hbase.plugin.test.example.service.OrderService;
+import com.wmz.hbase.plugin.example.service.OrderService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
