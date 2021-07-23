@@ -1,5 +1,5 @@
 # HbasePlugin
-这是基于hbase2.0一个支持注解式增删改查的hbase-plugin。
+这是基于hbase2.0以上一个支持注解式增删改查的hbase-plugin。
 ### 功能特性
 1. 对hbase进行增删改查。
 2. 支持hbase自动建表
@@ -11,13 +11,30 @@
 	+ maven依赖
 		
 	``` xml
-		<dependency>
-            <groupId>io.github.lcf-wmz</groupId>
-            <artifactId>hbase-plugin-spring-boot-starter</artifactId>
-            <version>Latest Version</version>
-        </dependency>
+ 	<dependency>
+	   <groupId>io.github.lcf-wmz</groupId>
+	   <artifactId>hbase-plugin-spring-boot-starter</artifactId>
+	   <version>Latest Version</version>
+ 	</dependency>
 	```
-2. 使用注解定义entity.(2种定义自动分区的方式)
+2. 配置文件
+``` yml
+hbase-plugin:
+ zookeeperQuorum: hadoop1,hadoop2,hadoop3
+ mode-enum: dev
+```
+ + hbase-plugin.zookeeperQuorum:表示hbase集群对应zookeeper集群
+ + hbase-plugin.mode-enum：表示hbasePlugin运行模式，包含三种:DEFAULT、DEV、PRO
+ 	- DEFAULT: 默认模式。不配置hbase-plugin.mode-enum表示默认模式，根据注解只进行增删改查DML操作，不会进行自动建表。
+ 	
+	- DEV: 开发模式。 
+	  根据代码注解配置执行自动建表DDL操作,以代码中配置的表结构优先。
+	  - 注意：对于hbase库中存在并且代码已配置的表，会删除该表在代码中未配置的列簇，即代码跟表结构完全一致。（会造成该部分数据丢失） 
+	
+	-  PRO: 生产模式 。根据代码注解配置执行自动建表DDL操作,以hbase库中表结构优先。 
+	    - 注意：与DEV开发模式相对应，对于hbase库中已存在的表空间、表结构，不做任何改变操作。
+			  
+3. 使用注解定义entity.(2种定义自动分区的方式)
 	- 方式1：通过配置分隔字符串（regionSplitKeys）自动分区
 	``` java
 	@HbaseTable(table = "test:goods",regionSplitKeys = {"g"})
@@ -76,7 +93,7 @@
 
 	}
 	```
-3. 使用(详情请查看源码example)
+4. 使用(详情请查看源码example)
 	``` java
 	@Resource
     private HbaseAccessor hbaseAccessor;
@@ -100,7 +117,7 @@
 		hbaseAccessor.delete(id,Order.class,Order::getNum);
 	}
 	```
-4. 关键注解说明
+5. 关键注解说明
  + @HbaseTable 注解在entity类上
  ``` java
  @HbaseTable(table = "test:goods",regionSplitKeys = {"g"})
@@ -111,6 +128,8 @@
  ```
  ``` java
  @HbaseTable(table = "test:order",regionNum = 10)
+ ```
+ ```
   regionNum = 10,表示分区数为10
  ```
   ``` java
@@ -124,19 +143,19 @@
  @HbaseRowKey
  private String id;
  ```
- ```
+ ``` java
  @HbaseRowKey
  public String getId(){
  	return id;
  };
   ```
- ```
+ ``` java
  @HbaseRowKey
  public String setId(){
  	return id;
  };
   ```
-  ```
+  ``` java
  @HbaseRowKey
  public String isId(){
  	return id;
@@ -159,9 +178,22 @@
  ```
  表示：属性price对应hbase表中的column为price，默认列簇为'f',该列的默认过期时间为15天，默认的压缩方式为SNAPPY。
   ```
+  + @HTableScan 对于不在当前springboot启动类下扫描的包，使用@HTableScan进行声明
+  
+  	``` java
+	@HTableScan(value = "com.my.custom.test" )
+	@SpringBootApplication(scanBasePackages={"com.wmz.hbase.plugin.example"})
+	public class TestSpringBootApplication {
+
+		public static void main(String[] args) {
+			SpringApplication.run(TestSpringBootApplication.class, args);
+		}
+
+	}
+  ```
  
-5. 其他
- + 有使用问题可以邮箱咨询
- + 邮箱 1154535007@qq.com
+6. 其他
+  有使用问题可以邮箱咨询。
+  邮箱 1154535007@qq.com
 
 	
