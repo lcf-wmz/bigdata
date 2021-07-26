@@ -117,8 +117,9 @@ hbase-plugin:
 		hbaseAccessor.delete(id,Order.class,Order::getNum);
 	}
 	```
-5. 关键注解说明
- + @HbaseTable 注解在entity类上
+### 关键注解说明
+
+1. @HbaseTable 注解在entity类上
  ``` java
  @HbaseTable(table = "test:goods",regionSplitKeys = {"g"})
  ```
@@ -138,7 +139,7 @@ hbase-plugin:
  ```
  表示namespace为default的user表,且分区数默认为1
  ```
-  + @HbaseRowKey 可以注解在entity类属性、get方法、set方法以及is方法上
+2.@HbaseRowKey 可以注解在entity类属性、get方法、set方法以及is方法上
  ``` java
  @HbaseRowKey
  private String id;
@@ -161,9 +162,9 @@ hbase-plugin:
  	return id;
  };
  ```
- + @HbaseFamily 与@HbaseField结合使用，详情查看@HbaseField注解说明
+3.@HbaseFamily 与@HbaseField结合使用，详情查看@HbaseField注解说明
  
- + @HbaseField 可以注解在entity类属性、get方法、set方法以及is方法上
+4.@HbaseField 可以注解在entity类属性、get方法、set方法以及is方法上
 	 ``` java
 	@HbaseField(qualifier="goodsProduce",family = @HbaseFamily(family = "g",expire="90 DAYS") )
 	private String produce;
@@ -178,7 +179,7 @@ hbase-plugin:
  ```
  表示：属性price对应hbase表中的column为price，默认列簇为'f',该列的默认过期时间为15天，默认的压缩方式为SNAPPY。
   ```
-  + @HTableScan 对于不在当前springboot启动类下扫描的包，使用@HTableScan进行声明
+  5.@HTableScan 对于不在当前springboot启动类下扫描的包，使用@HTableScan进行声明
   
   	``` java
 	@HTableScan(value = "com.my.custom.test" )
@@ -190,10 +191,9 @@ hbase-plugin:
 		}
 
 	}
-  ```
- 
-6. 其他
+  	``` 
+### 其他
   有使用问题可以邮箱咨询。
   邮箱 1154535007@qq.com
+  如果觉得好用麻烦点个star.
 
-	
